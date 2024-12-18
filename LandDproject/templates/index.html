@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearningHub</title>
+    <style>
+        /* Body and Background */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1e90ff, #ff7f50);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        nav {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        nav h1 {
+            color: #ffd700;
+            font-size: 1.8rem;
+            margin: 0;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            align-items: center;
+            flex-wrap: nowrap;
+            margin-right: auto; /* Ensures buttons are shifted left */
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0.6rem 1.8rem;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .nav-links a:first-child {
+            background: linear-gradient(90deg, #ffd700, #ffa500);
+            color: #000;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-links a:first-child:hover {
+            background: linear-gradient(90deg, #ffa500, #ff4500);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a:last-child {
+            background: linear-gradient(90deg, #1e90ff, #00bfff);
+            color: #fff;
+            border: 1px solid #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-links a:last-child:hover {
+            background: linear-gradient(90deg, #00bfff, #1e90ff);
+            color: #000;
+            transform: scale(1.05);
+        }
+
+        /* Hero Section */
+        section {
+            margin-top: 100px;
+            text-align: center;
+            padding: 2rem;
+            width: 100%;
+        }
+
+        section h2 {
+            font-size: 3rem;
+            color: #ffd700;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+            margin-bottom: 1rem;
+        }
+
+        section p {
+            font-size: 1.4rem;
+            color: #fff;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+            margin-top: 0;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            background: rgba(0, 0, 0, 0.9);
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+            width: 100%;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        footer a {
+            color: #ffd700;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <h1>LearningHub</h1>
+        <div class="nav-links">
+            <a href="{{ url_for('login') }}">Login</a> | 
+            <a href="{{ url_for('register') }}">Register</a>
+        </div>
+    </nav>
+    <section>
+        <h2>Welcome to LearningHub</h2>
+        <p>Manage training programs, track progress, and upskill employees seamlessly.</p>
+    </section>
+    <footer>
+        <p>&copy; 2024 LearningHub. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </footer>
+</body>
+
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Home</title>
+</head>
+<body>
+    <h1>Welcome to LMS</h1>
+    <a href="{{ url_for('login') }}">Login</a> | 
+    <a href="{{ url_for('register') }}">Register</a>
+</body>
+</html> -->

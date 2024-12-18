@@ -1,0 +1,235 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Dashboard</title>
+    <style>
+        /* Basic styling for the dashboard */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .dashboard-section {
+            margin-bottom: 30px;
+        }
+        h2 {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        li {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+        .logout-btn {
+            background-color: #dc3545;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+            text-align: center;
+            display: block;
+            width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 5px;
+        }
+        .logout-btn:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Welcome, {{ session['name'] }} (Employee)</h1>
+        <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+    </header> -->
+
+    <!-- <div class="container">
+        <div class="dashboard-section">
+            <h2>Assigned Courses</h2>
+            <ul>
+                {% for assignment in assignments %}
+                    <li>
+                        <strong>{{ assignment.Title }}</strong> - 
+                        Assigned on {{ assignment.AssignedDate }} - 
+                        <a href="{{ assignment.Link }}" target="_blank">Access Course</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div> -->
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        li {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        label {
+            font-weight: bold;
+        }
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        textarea {
+            width: 100%;
+            margin-top: 10px;
+        }
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .logout-btn {
+            background-color: #dc3545;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+            display: block;
+            margin: 20px auto;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .logout-btn:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Welcome, {{ session['name'] }} (Employee)</h1>
+        <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+    </header>
+
+    <div class="container">
+        <div class="dashboard-section">
+            <h2>Assigned Courses</h2>
+            <ul>
+                {% for assignment in assignments %}
+                <li>
+                    <strong>{{ assignment.Title }}</strong><br>
+                    Assigned on: {{ assignment.AssignedDate }}<br>
+                    Progress: {{ assignment.Progress }}%<br>
+                    <a href="{{ assignment.Link }}" target="_blank">Access Course</a><br>
+
+                    <!-- Course Status Update Form -->
+                    <form method="POST" action="{{ url_for('update_course') }}">
+                        <input type="hidden" name="assignment_id" value="{{ assignment.AssignmentID }}">
+                        <label for="status_{{ assignment.AssignmentID }}">Update Status:</label>
+                        <select name="status" id="status_{{ assignment.AssignmentID }}">
+                            <option value="Started">Started</option>
+                            <option value="Completed">Completed</option>
+                        </select>
+                        <button type="submit">Submit</button>
+                    </form>
+                    <br>
+
+                    <!-- Feedback Form -->
+                    <form method="POST" action="{{ url_for('submit_feedback') }}">
+                        <input type="hidden" name="assignment_id" value="{{ assignment.AssignmentID }}">
+                        <label for="rating_{{ assignment.AssignmentID }}">Rating:</label>
+                        <select name="rating" id="rating_{{ assignment.AssignmentID }}">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <br>
+                        <label for="comments_{{ assignment.AssignmentID }}">Comments:</label><br>
+                        <textarea name="comments" id="comments_{{ assignment.AssignmentID }}" rows="4"></textarea>
+                        <br>
+                        <button type="submit">Submit Feedback</button>
+                    </form>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>
+
+    
+    
+<!-- 
+</body>
+</html> -->

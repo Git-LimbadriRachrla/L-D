@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assign Course</title>
+</head>
+<body>
+    <h1>Assign Course</h1>
+    <!-- Optional: If you want to show the course details from course_request, ensure that it's passed from the route -->
+    
+    
+    <form method="POST" action="{{ url_for('assign_course') }}">
+        <!-- Add a dropdown for selecting the course -->
+        <label for="course_id">Select Course:</label>
+        <select name="course_id" required>
+            {% for course in courses %}
+            <option value="{{ course.CourseID }}">{{ course.Title }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <!-- Add the employee selection dropdown -->
+        <label for="employee_id">Assign to Employee:</label>
+        <select name="employee_id" required>
+            {% for employee in employees %}
+            <option value="{{ employee.EmployeeID }}">{{ employee.Name }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <button type="submit">Assign</button>
+    </form>
+</body>
+</html>

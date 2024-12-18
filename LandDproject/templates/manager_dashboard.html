@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager Dashboard</title>
+    <style>
+        /* Basic styling for the dashboard */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .dashboard-section {
+            margin-bottom: 30px;
+        }
+        h2 {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        li {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+        .logout-btn {
+            background-color: #dc3545;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+            text-align: center;
+            display: block;
+            width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 5px;
+        }
+        .logout-btn:hover {
+            background-color: #c82333;
+        }
+        form {
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button[type="submit"] {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        a {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Welcome, {{ session['name'] }} (Manager)</h1>
+        <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+    </header>
+
+    <div class="container">
+        <!-- Course Request Form -->
+        <div class="dashboard-section">
+            <h2>Submit Course Request</h2>
+            <form action="{{ url_for('submit_course_request') }}" method="POST">
+                <label for="course_title">Course Title:</label><br>
+                <input type="text" id="course_title" name="course_title" required><br><br>
+
+                <label for="description">Description:</label><br>
+                <textarea id="description" name="description" rows="4" required></textarea><br><br>
+
+                <button type="submit">Submit Request</button>
+            </form>
+        </div>
+
+        <!-- List of Course Requests -->
+        <div class="dashboard-section">
+            <h2>Course Requests</h2>
+            <!-- <ul>
+                {% for request in requests %}
+                    <li>{{ request.CourseTitle }} - {{ request.Status }}
+                        {% if request.Status == 'Pending' %}
+                            <a href="{{ url_for('approve_request', request_id=request.RequestID) }}">Approve</a> |
+                            <a href="{{ url_for('reject_request', request_id=request.RequestID) }}">Reject</a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul> -->
+        </div>
+
+        <!-- Approved Requests -->
+        <div class="dashboard-section">
+            <h3>Approved Requests</h3>
+            <ul>
+                {% for approved in approved_requests %}
+                    <li>{{ approved.CourseTitle }} - {{ approved.Status }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Rejected Requests -->
+        <div class="dashboard-section">
+            <h3>Rejected Requests</h3>
+            <ul>
+                {% for rejected in rejected_requests %}
+                    <li>{{ rejected.CourseTitle }} - {{ rejected.Status }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>
